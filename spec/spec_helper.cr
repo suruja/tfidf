@@ -1,2 +1,2 @@
 require "spec"
-require "../src/tfidf"
+require "../src/cadmium_tfidf"
