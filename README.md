@@ -1,6 +1,6 @@
-# tfidf
+# tf-idf
 
-TODO: Write a description here
+[Term Frequency–Inverse Document Frequency (tf-idf)](http://en.wikipedia.org/wiki/Tf%E2%80%93idf) is implemented to determine how important a word (or words) is to a document relative to a corpus. The following example will add four documents to a corpus and determine the weight of the word "crystal" and then the weight of the word "ruby" in each document.
 
 ## Installation
 
@@ -8,8 +8,8 @@ TODO: Write a description here
 
    ```yaml
    dependencies:
-     tfidf:
-       github: your-github-user/tfidf
+     cadmium_tfidf:
+       github: cadmiumcr/tfidf
    ```
 
 2. Run `shards install`
@@ -17,18 +17,41 @@ TODO: Write a description here
 ## Usage
 
 ```crystal
-require "tfidf"
+require "cadmium_tfidf"
 ```
 
-TODO: Write usage instructions here
+```crystal
+tfidf = Cadmium.tf_idf.new
+tfidf.add_document("this document is about crystal.")
+tfidf.add_document("this document is about ruby.")
+tfidf.add_document("this document is about ruby and crystal.")
+tfidf.add_document("this document is about crystal. it has crystal examples")
 
-## Development
+puts "crystal --------------------------------"
+tfidf.tfidfs("crystal") do |i, measure, key|
+  puts "document ##{i} is #{measure}"
+end
 
-TODO: Write development instructions here
+puts "ruby --------------------------------"
+tfidf.tfidfs("ruby") do |i, measure, key|
+  puts "document ##{i} is #{measure}"
+end
+
+# =>  crystal --------------------------------
+      document #0 is 1
+      document #1 is 0
+      document #2 is 1
+      document #3 is 2
+      ruby --------------------------------
+      document #0 is 0
+      document #1 is 1.2876820724517808
+      document #2 is 1.2876820724517808
+      document #3 is 0
+```
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/tfidf/fork>)
+1. Fork it (<https://github.com/cadmiumcr/tfidf/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -36,4 +59,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [Chris Watson](https://github.com/your-github-user) - creator and maintainer
+- [Chris Watson](https://github.com/watzon) - creator and maintainer
