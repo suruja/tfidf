@@ -10,13 +10,13 @@ module Cadmium
     @documents : Array(Document)
     @idf_cache : Hash(String, Float64)
     @stop_words : Array(String)
-    @tokenizer : Cadmium::Word
+    @tokenizer : Cadmium::Tokenizer::Word
 
     def initialize(documents : Array(Document)? = nil, custom_stop_words : Array(String) = @@stop_words)
       @documents = documents || [] of Document
       @idf_cache = {} of String => Float64
       @stop_words = custom_stop_words
-      @tokenizer = Cadmium::Word.new
+      @tokenizer = Cadmium::Tokenizer::Word.new
     end
 
     def tfidf(terms, d)
