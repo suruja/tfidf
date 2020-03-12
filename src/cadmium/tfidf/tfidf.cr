@@ -2,7 +2,7 @@ require "random"
 
 module Cadmium
   class TfIdf
-    include StopWords
+    include Cadmium::Util::StopWords
 
     # TODO: Figure out how to make this work with no key
     alias Document = NamedTuple(key: String, terms: Hash(String, Float64))
